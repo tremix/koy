@@ -56,3 +56,7 @@ Route::group(array('prefix' => 'admin'), function(){
 Route::get('login', function(){
     return "Login Page";
 });
+
+Route::resource('user', 'UserController', array('only' => array('edit', 'update', 'destroy')));
+
+Route::resource('user', 'UserController');
