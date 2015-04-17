@@ -27,7 +27,32 @@ Route::get('/blog/single', array('uses' => 'PostController@single', 'as' => 'pos
 /*Route::get('/post/listing', array('uses' => 'PostController@listing', 'as' => 'post.listing'));
 Route::get('/blog/single/{id}', array('uses' => 'PostController@single', 'as' => 'post.single'))->where('id' , '[1-9][0-9]*');*/
 
-Route::get('/blog/single/{id}/{slug}', array('uses' => 'PostController@single', 'as' => 'get.post.single'))->where(array('id' => '[1-9][0-9]*', 'slug' => '[a-zA-Z0-9-_]+'));
+/*Route::get('post/listing', array('uses' => 'PostController@listing', 'as' => 'get.post.listing'));
 
-Route::post('/blog/single/{id}', array('uses' => 'PostController@update', 'as' => 'post.post.single'))->where(array('id' => '[1-9][0-9]*'));
+Route::get('post/{id}', array('uses' => 'PostController@single', 'as' => 'get.post.single', 'before' => 'auth' ))->where(array('id' => '[1-9][0-9]*'));
 
+Route::post('post/{id}', array('uses' => 'PostController@update', 'as' => 'post.post.single'))->where(array('id' => '[1-9][0-9]*'));
+
+Route::get('login', function(){
+    return "login Page";
+});*/
+
+/*Route::group(array('before' => 'auth'), function(){
+    Route::get('post/listing', array('uses' => 'PostController@listing', 'as' => 'get.post.listing'));
+
+    Route::get('post/{id}', array('uses' => 'PostController@single', 'as' => 'get.post.single', 'before' => 'auth' ))->where(array('id' => '[1-9][0-9]*'));
+
+    Route::post('post/{id}', array('uses' => 'PostController@update', 'as' => 'post.post.single'))->where(array('id' => '[1-9][0-9]*'));
+});*/
+
+Route::group(array('prefix' => 'admin'), function(){
+    Route::get('post/listing', array('uses' => 'PostController@listing', 'as' => 'get.post.listing'));
+
+    Route::get('post/{id}', array('uses' => 'PostController@single', 'as' => 'get.post.single' ))->where(array('id' => '[1-9][0-9]*'));
+
+    Route::post('post/{id}', array('uses' => 'PostController@update', 'as' => 'post.post.single'))->where(array('id' => '[1-9][0-9]*'));
+});
+
+Route::get('login', function(){
+    return "Login Page";
+});
